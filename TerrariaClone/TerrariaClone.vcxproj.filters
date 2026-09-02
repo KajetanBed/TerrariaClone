@@ -15,27 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TerrariaClone.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Blocks.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainGenerator.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Block.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Grass.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Stone.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Dirt.h">
+    <ClInclude Include="Blocks.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="FastNoiseLite.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainGenerator.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

@@ -131,15 +131,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Blocks.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="TerrariaClone.cpp" />
+    <ClCompile Include="TerrainGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Block.h" />
-    <ClInclude Include="Dirt.h" />
-    <ClInclude Include="Grass.h" />
+    <ClInclude Include="Blocks.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="FastNoiseLite.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Stone.h" />
+    <ClInclude Include="TerrainGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,22 +3,22 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <vector>
 #include <memory>
-#include "Block.h" 
+#include "Blocks.h" 
 
 class Player {
 public:
     sf::Sprite sprite;
     sf::Vector2f velocity; 
-    float speed = 250.0f;  
+    float speed = 200.0f;  
     float gravity = 1200.0f; 
-    float jumpForce = -500.0f; 
+    float jumpForce = -350.0f; 
     bool isGrounded = false;
 
     Player(const sf::Texture& texture, float startX, float startY) : sprite(texture) {
         sprite.setPosition({ startX, startY });
     }
 
-    void update(float dt, const std::vector<std::unique_ptr<Block>>& world);
+    void update(float dt, const std::vector<std::vector<std::unique_ptr<Block>>>& world);
 
     void draw(sf::RenderWindow& window);
 
