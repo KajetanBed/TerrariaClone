@@ -38,6 +38,11 @@ void Game::processEvents() {
         if (event->is<sf::Event::Closed>()) {
             window.close();
         }
+        if (const auto* keyEvent = event->getIf<sf::Event::KeyPressed>()) {
+            if (keyEvent->code == sf::Keyboard::Key::Escape) {
+                inventory.toggle();
+            }
+        }
     }
 }
 
@@ -75,5 +80,6 @@ void Game::render() {
     }
 
     player->draw(window);
+	inventory.draw(window, player->getSelectedSlot());
     window.display();
 }

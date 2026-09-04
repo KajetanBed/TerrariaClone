@@ -4,6 +4,7 @@
 #include <memory>
 #include "Blocks.h"
 #include "Player.h"
+#include "Inventory.h"
 
 class Game {
 private:
@@ -13,6 +14,8 @@ private:
     std::unique_ptr<Player> player;
     sf::View camera;
     sf::Clock clock;
+
+	Inventory inventory;
 
     void processEvents();
     void update(float dt);

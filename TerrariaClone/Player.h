@@ -13,10 +13,13 @@ public:
     float gravity = 1200.0f; 
     float jumpForce = -350.0f; 
     bool isGrounded = false;
+    int selectedSlotIndex = 1;
 
     Player(const sf::Texture& texture, float startX, float startY) : sprite(texture) {
         sprite.setPosition({ startX, startY });
     }
+    void selectedSlot();
+    int getSelectedSlot() const { return selectedSlotIndex; }
 
     void update(float dt, const std::vector<std::vector<std::unique_ptr<Block>>>& world);
 

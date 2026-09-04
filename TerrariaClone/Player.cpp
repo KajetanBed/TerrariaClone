@@ -2,8 +2,6 @@
 #include "Config.h" 
 #include <cmath>
 
-#include <cmath> // potrzebne do std::floor
-
 void Player::update(float dt, const std::vector<std::vector<std::unique_ptr<Block>>>& world) {
     velocity.y += gravity * dt;
     velocity.x = 0.0f;
@@ -61,6 +59,7 @@ void Player::update(float dt, const std::vector<std::vector<std::unique_ptr<Bloc
             }
         }
     }
+	selectedSlot();
 }
 
 void Player::draw(sf::RenderWindow& window) {
@@ -69,4 +68,19 @@ void Player::draw(sf::RenderWindow& window) {
 
 sf::Vector2f Player::getPosition() const {
     return { sprite.getPosition().x + 16.0f, sprite.getPosition().y + 24.0f };
+}
+
+void Player::selectedSlot() {
+    const sf::Keyboard::Key numKeys[] = {
+    sf::Keyboard::Key::Num1, sf::Keyboard::Key::Num2, sf::Keyboard::Key::Num3,
+    sf::Keyboard::Key::Num4, sf::Keyboard::Key::Num5, sf::Keyboard::Key::Num6,
+    sf::Keyboard::Key::Num7, sf::Keyboard::Key::Num8, sf::Keyboard::Key::Num9
+    };
+
+    for (int i = 0; i < 9; ++i) {
+        if (sf::Keyboard::isKeyPressed(numKeys[i])) {
+            selectedSlotIndex = i + 1;
+        }
+    }
+	
 }
