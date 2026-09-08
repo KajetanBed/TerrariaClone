@@ -9,7 +9,7 @@
 class Game {
 private:
     sf::RenderWindow window;
-    sf::Texture grassTex, dirtTex, stoneTex, charTex;
+    sf::Texture grassTex, dirtTex, stoneTex, charTex, axeTex, pickTex, swordTex;
     std::vector<std::vector<std::unique_ptr<Block>>> world;
     std::unique_ptr<Player> player;
     sf::View camera;

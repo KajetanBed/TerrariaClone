@@ -1,14 +1,23 @@
 #include "Player.h"
 #include "Config.h" 
+#include "Inventory.h"
 #include <cmath>
 
 void Player::update(float dt, const std::vector<std::vector<std::unique_ptr<Block>>>& world) {
     velocity.y += gravity * dt;
     velocity.x = 0.0f;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) velocity.x = -speed;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) velocity.x = speed;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && isGrounded) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+		isFacingRight = false;
+        velocity.x = -speed;
+		sprite.setScale({ -1.0f, 1.0f });
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+		isFacingRight = true;
+        velocity.x = speed;
+		sprite.setScale({ 1.0f, 1.0f });
+    }
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) && isGrounded) {
         velocity.y = jumpForce;
         isGrounded = false;
     }
@@ -60,15 +69,66 @@ void Player::update(float dt, const std::vector<std::vector<std::unique_ptr<Bloc
         }
     }
 	selectedSlot();
+
+    Item* activeItem = inventoryItems[selectedSlotIndex - 1].get();
+
+    if (activeItem) {
+		sf::Vector2f basePos = getPosition();
+        float offsetX = 3.0f;
+		float offsetY = 7.0f;
+        if (!isFacingRight) {
+            activeItem->setScale({ -1.0f, 1.0f });
+            offsetX = -offsetX;
+        }
+        else {
+            activeItem->setScale({ 1.0f, 1.0f });
+        }
+        activeItem->setPosition({ basePos.x + offsetX, basePos.y + offsetY });
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+			float swingAngle = isFacingRight ? -45.0f : 45.0f;
+			activeItem->setRotation(sf::degrees(swingAngle));
+        }
+        else {
+            activeItem->setRotation(sf::degrees(0.0f));
+		}
+    }
 }
 
 void Player::draw(sf::RenderWindow& window) {
     window.draw(sprite);
+    Item* activeItem = inventoryItems[selectedSlotIndex - 1].get();
+    if (activeItem) {
+        activeItem->draw(window);
+    }
 }
 
 sf::Vector2f Player::getPosition() const {
-    return { sprite.getPosition().x + 16.0f, sprite.getPosition().y + 24.0f };
+	sf::FloatRect bounds = sprite.getGlobalBounds();
+    return {
+        bounds.position.x + (bounds.size.x / 2.0f),
+        bounds.position.y + (bounds.size.y / 2.0f)
+    };
 }
+
+void Player::setInventoryItem(int slotIndex, std::unique_ptr<Item> item)
+{
+    if (slotIndex >= 0 && slotIndex < inventoryItems.size()) {
+        inventoryItems[slotIndex] = std::move(item);
+    }
+}
+
+const std::array<std::unique_ptr<Item>, 36>& Player::getInventoryItems() const
+{
+    return inventoryItems;
+}
+
+void Player::swapInventoryItems(int index1, int index2)
+{
+	std::swap(inventoryItems[index1], inventoryItems[index2]);
+}
+
+
+
 
 void Player::selectedSlot() {
     const sf::Keyboard::Key numKeys[] = {
